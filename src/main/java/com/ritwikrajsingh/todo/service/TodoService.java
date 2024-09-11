@@ -1,0 +1,21 @@
+package com.ritwikrajsingh.todo.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.ritwikrajsingh.todo.dto.TodoRequestDTO;
+import com.ritwikrajsingh.todo.dto.TodoResponseDTO;
+
+@Service
+public interface TodoService {
+    public TodoResponseDTO createTodo(TodoRequestDTO dto);
+
+    public List<TodoResponseDTO> getAllTodos();
+
+    public TodoResponseDTO updateTodoById(Integer id, TodoRequestDTO dto);
+
+    public TodoResponseDTO patchTodoById(Integer id, TodoRequestDTO dto);
+
+    public void deleteTodoById(Integer id);
+}
