@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.ritwikrajsingh.todo.dto.TodoPatchRequestDTO;
 import com.ritwikrajsingh.todo.dto.TodoRequestDTO;
 import com.ritwikrajsingh.todo.dto.TodoResponseDTO;
 
@@ -15,7 +16,7 @@ public interface TodoService {
 
     public TodoResponseDTO updateTodoById(Integer id, TodoRequestDTO dto);
 
-    public TodoResponseDTO patchTodoById(Integer id, TodoRequestDTO dto);
+    public TodoResponseDTO patchTodoById(Integer id, TodoPatchRequestDTO dto);
 
     public void deleteTodoById(Integer id);
 }
