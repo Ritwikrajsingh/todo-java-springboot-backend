@@ -2,6 +2,8 @@ package com.ritwikrajsingh.todo.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.ritwikrajsingh.todo.dto.TodoPatchRequestDTO;
 import com.ritwikrajsingh.todo.dto.TodoRequestDTO;
 import com.ritwikrajsingh.todo.dto.TodoResponseDTO;
@@ -12,6 +14,7 @@ import com.ritwikrajsingh.todo.service.TodoService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
+@Service
 @RequiredArgsConstructor
 public class TodoServiceImpl implements TodoService {
     private final TodoRepository repository;
