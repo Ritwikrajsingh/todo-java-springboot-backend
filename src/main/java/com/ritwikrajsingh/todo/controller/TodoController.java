@@ -20,6 +20,7 @@ import com.ritwikrajsingh.todo.dto.TodoRequestDTO;
 import com.ritwikrajsingh.todo.dto.TodoResponseDTO;
 import com.ritwikrajsingh.todo.service.impl.TodoServiceImpl;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -30,7 +31,7 @@ public class TodoController {
     private final TodoServiceImpl service;
 
     @PostMapping
-    public ResponseEntity<TodoResponseDTO> createTodo(@RequestBody TodoRequestDTO dto) {
+    public ResponseEntity<TodoResponseDTO> createTodo(@RequestBody @Valid TodoRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.service.createTodo(dto));
     }
 
@@ -40,7 +41,8 @@ public class TodoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TodoResponseDTO> updateTodoById(@PathVariable Integer id, @RequestBody TodoRequestDTO dto) {
+    public ResponseEntity<TodoResponseDTO> updateTodoById(@PathVariable Integer id,
+            @RequestBody @Valid TodoRequestDTO dto) {
         return ResponseEntity.ok(this.service.updateTodoById(id, dto));
     }
 
