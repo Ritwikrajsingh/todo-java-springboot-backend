@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorMessageDTO> entityNotFoundExceptionHandler(EntityNotFoundException ex) {
         ErrorMessageDTO error = new ErrorMessageDTO(ex.getMessage());
-        System.out.println("this is a test: " + error);
+        System.out.println(error);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
