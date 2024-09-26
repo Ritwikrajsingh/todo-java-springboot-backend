@@ -11,7 +11,7 @@ public class TodoRequestDTO {
     @NotNull(message = "Task cannot be null.")
     @NotEmpty(message = "Task cannot be empty.")
     private String task;
-    private boolean isComplete;
+    private Boolean isComplete;
 
     public Todo toEntity() {
         return Todo.builder().task(this.task).isComplete(this.isComplete).build();
