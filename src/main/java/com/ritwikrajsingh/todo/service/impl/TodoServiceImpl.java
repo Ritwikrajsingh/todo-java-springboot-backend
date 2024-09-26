@@ -19,6 +19,11 @@ import lombok.RequiredArgsConstructor;
 public class TodoServiceImpl implements TodoService {
     private final TodoRepository repository;
 
+    private Todo findTodoByIdOrThrowError(Integer id) {
+        return this.repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Todo not found with id: " + id));
+    }
+
     @Override
     public TodoResponseDTO createTodo(TodoRequestDTO dto) {
         return TodoResponseDTO.fromEntity(this.repository.save(dto.toEntity()));
@@ -29,10 +34,15 @@ public class TodoServiceImpl implements TodoService {
         return this.repository.findAll().stream().map(TodoResponseDTO::fromEntity).toList();
     }
 
+    public TodoResponseDTO getTodoById(Integer id) {
+        Todo entity = this.findTodoByIdOrThrowError(id);
+
+        return TodoResponseDTO.fromEntity(entity);
+    }
+
     @Override
     public TodoResponseDTO updateTodoById(Integer id, TodoRequestDTO dto) {
-        Todo entity = this.repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Todo not found with id: " + id));
+        Todo entity = this.findTodoByIdOrThrowError(id);
 
         entity.setTask(dto.getTask());
         entity.setIsComplete(dto.getIsComplete());
@@ -42,8 +52,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public TodoResponseDTO patchTodoById(Integer id, TodoPatchRequestDTO dto) {
-        Todo entity = this.repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Todo not found with id: " + id));
+        Todo entity = this.findTodoByIdOrThrowError(id);
 
         if (dto.getTask() == null && dto.getIsComplete() == null) {
             throw new IllegalArgumentException("At least one field must be provided for update.");
@@ -62,8 +71,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public void deleteTodoById(Integer id) {
-        Todo entity = this.repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Todo not found with id: " + id));
+        Todo entity = this.findTodoByIdOrThrowError(id);
 
         this.repository.delete(entity);
     }
