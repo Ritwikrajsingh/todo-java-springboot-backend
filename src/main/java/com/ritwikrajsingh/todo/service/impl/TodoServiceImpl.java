@@ -35,7 +35,7 @@ public class TodoServiceImpl implements TodoService {
                 .orElseThrow(() -> new EntityNotFoundException("Todo not found with id: " + id));
 
         entity.setTask(dto.getTask());
-        entity.setIsComplete(dto.isComplete());
+        entity.setIsComplete(dto.getIsComplete());
 
         return TodoResponseDTO.fromEntity(this.repository.save(entity));
     }
