@@ -40,6 +40,12 @@ public class TodoController {
         return ResponseEntity.ok(this.service.getAllTodos());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TodoResponseDTO> getTodoById(@PathVariable Integer id) {
+        return ResponseEntity.ok(this.service.getTodoById(id));
+
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<TodoResponseDTO> updateTodoById(@PathVariable Integer id,
             @RequestBody @Valid TodoRequestDTO dto) {
